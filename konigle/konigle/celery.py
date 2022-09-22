@@ -7,9 +7,9 @@ app = Celery("konigle")
 app.config_from_object("django.conf:settings", namespace="CELERY")
 
 app.conf.beat_schedule  = {
-    'every-5-seconds':{
+    'every-mon-wed':{
         'task':'unity.tasks.show',
-        'schedule':5
+        'schedule':crontab(0, 0,day_of_week='monday,wednesday ')
 
     }
 }
