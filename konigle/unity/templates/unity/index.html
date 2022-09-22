@@ -6,13 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
 </head>
 <body>
-    <div class="container-fluid">
-        <h5>{{format_date}}</h5>
+    <div class="container">
+        <div class="row">
+            <h5>Unity</h5>
+        </div>
+        
+    </div>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <h4 id = "datetime"></h4>
+        </div>
     </div>
     
     <br>
@@ -22,7 +28,7 @@
                 <div class="card bg-light" style="width: 18rem;">
                     <div class="border border-dark card-body">
                     <p class="card-text">Email list</p>
-                    <h5 class="card-title">10000</h5>
+                    <h5 class="card-title">{{all_emails|length}}</h5>
                     </div>
                 </div>
             </div>
@@ -30,14 +36,14 @@
                 <div class="card bg-light" style="width: 18rem; ">
                     <div class="border border-dark card-body">
                     <p class="card-text">New this month</p>
-                    <h5 class="card-title">501</h5>
+                    <h5 class="card-title">{{email_this_month}}</h5>
                     </div>
                 </div>
             </div><div class="col-sm">
                 <div class="card bg-light" style="width: 18rem;">
                     <div class="border border-dark card-body">
                     <p class="card-text">Unsubscribed</p>
-                    <h5 class="card-title">30</h5>
+                    <h5 class="card-title">{{number_unsubscribed|length}}</h5>
                     </div>
                 </div>
             </div>
@@ -45,8 +51,8 @@
     </div>
     
     <br>
-    <div class="container-fluid">
-        <table class="table">
+    <div class="container">
+        <table class="table table-bordered border-primary">
             <thead>
               <tr>
                 <th scope="col">EmailID</th>
@@ -55,23 +61,24 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>thinhkba.nguyenvan@gmail.com</td>
-                <td>Otto</td>
-                <td>Subscribed</td>
-              </tr>
-              <tr>
-                <td>thinhkba.nguyenvan@gmail.com</td>
-                <td>one minute ago</td>
-                <td>Subscribed</td>
-              </tr>
-              <tr>
-                <td>thinhkba.nguyenvan@gmail.com</td>
-                <td>one minute ago</td>
-                <td>Subscribed</td>
-              </tr>
+                {% for email in all_emails %}
+                    <tr>
+                        <td>{{email.name}}</td>
+                        <td>{{email.date|timesince}} ago</td>
+                        {% if email.status %}
+                        <td>Subscribed</td>
+                        {% else %}
+                        <td>Unsubscribed</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
             </tbody>
           </table>
       </div>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+    <script src="{% static 'js/index.js' %}"></script>
+    <script src="{% static 'js/e-widgets.v1.min.js' %}"></script>
 </body>
 </html>
