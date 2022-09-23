@@ -28,7 +28,7 @@
                 <div class="card bg-light" style="width: 18rem;">
                     <div class="border border-dark card-body">
                     <p class="card-text">Email list</p>
-                    <h5 class="card-title">{{all_emails|length}}</h5>
+                    <h5 class="card-title">{{total_emails}}</h5>
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@
               </tr>
             </thead>
             <tbody>
-                {% for email in all_emails %}
+                {% for email in page_obj.object_list %}
                     <tr>
                         <td>{{email.name}}</td>
                         <td>{{email.date|timesince}} ago</td>
@@ -75,6 +75,7 @@
             </tbody>
           </table>
       </div>
+      {% include "unity/paginator.html"%}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
